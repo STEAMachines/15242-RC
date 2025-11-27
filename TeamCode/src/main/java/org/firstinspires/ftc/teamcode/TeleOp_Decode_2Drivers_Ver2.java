@@ -21,8 +21,8 @@ public class TeleOp_Decode_2Drivers_Ver2 extends LinearOpMode {
         handleServo = hardwareMap.get(Servo.class, "handleServo");
         waitForStart();
         while(opModeIsActive()) {
-            double drive = gamepad1.left_stick_y;
-            double turn = -gamepad1.right_stick_x;
+            double drive = -gamepad1.left_stick_y;
+            double turn = gamepad1.right_stick_x;
             leftDrive.setPower(Range.clip(drive+turn, -1.0, 1.0));
             rightDrive.setPower(Range.clip(drive-turn, -1.0, 1.0));
             intakeMotors.setPower(

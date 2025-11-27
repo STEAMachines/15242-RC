@@ -39,12 +39,13 @@ public class TeleOp_Decode_1Drivers_Ver1 extends LinearOpMode {
         launcherMotors = hardwareMap.get(DcMotor.class, "launcherMotors");
         handleServo = hardwareMap.get(Servo.class, "handleServo");
         waitForStart();
-        initializeAprilTag();
-        displayWebcamVision();
+//        initializeAprilTag();
+//        displayWebcamVision();
         while(opModeIsActive()) {
-            double leftPower, rightPower;
-            double drive = gamepad1.left_stick_y;
-            double turn = -gamepad1.right_stick_x;
+            double leftPower;
+            double rightPower;
+            double drive = -gamepad1.left_stick_y;
+            double turn = gamepad1.right_stick_x;
             leftPower = Range.clip(drive + turn, -1.0, 1.0);
             rightPower = Range.clip(drive - turn, -1.0, 1.0);
             leftDrive.setPower(leftPower);
@@ -85,7 +86,7 @@ public class TeleOp_Decode_1Drivers_Ver1 extends LinearOpMode {
         aprilTag = new AprilTagProcessor.Builder().build();
         VisionPortal.Builder builder = new VisionPortal.Builder();
         if(USE_WEBCAM) {
-            builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"));
+            builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam SM"));
         }
         else {
             builder.setCamera(BuiltinCameraDirection.BACK);
