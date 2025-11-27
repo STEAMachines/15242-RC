@@ -41,7 +41,7 @@ public class TeleOp_Decode_1Drivers_Ver3 extends LinearOpMode {
                     0
             );
 
-            var iStat = 0;
+            int iStat = 0;
             if (gamepad1.x && iStat == 0) {
                 intakeMotors.setPower(1.0);
                 iStat = 1;
@@ -50,7 +50,7 @@ public class TeleOp_Decode_1Drivers_Ver3 extends LinearOpMode {
                 intakeMotors.setPower(0);
                 iStat = 0;
             }
-            var lStat = 0;
+            int lStat = 0;
             if (gamepad1.y && lStat == 0) {
                 launcherMotors.setPower(1.0);
                 lStat = 1;

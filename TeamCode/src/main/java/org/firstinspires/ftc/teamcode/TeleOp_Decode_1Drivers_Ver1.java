@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
@@ -31,6 +32,7 @@ public class TeleOp_Decode_1Drivers_Ver1 extends LinearOpMode {
     private VisionPortal visionPortal;
     private static final boolean USE_WEBCAM = true;
     private static final int DESIRED_TAG_ID = 20;
+    private boolean intakeToggle = false;
 
     public void runOpMode() {
         leftDrive = hardwareMap.get(DcMotor.class,"leftDrive");
@@ -44,19 +46,18 @@ public class TeleOp_Decode_1Drivers_Ver1 extends LinearOpMode {
         while(opModeIsActive()) {
             double leftPower;
             double rightPower;
-            double drive = -gamepad1.left_stick_y;
-            double turn = gamepad1.right_stick_x;
+            double drive = gamepad1.right_stick_x;
+            double turn = -gamepad1.left_stick_y;
             leftPower = Range.clip(drive + turn, -1.0, 1.0);
             rightPower = Range.clip(drive - turn, -1.0, 1.0);
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
-
             //left_bumper && right_bumper to move......
-            if(gamepad1.left_bumper) {
-                intakeMotors.setPower(1);
+            if (gamepad1.left_bumper && !gamepad1.left_bumper) {
+                intakeToggle = !intakeToggle;
             }
-            else if(gamepad1.right_bumper) {
-                intakeMotors.setPower(-1);
+            if (intakeToggle) {
+                intakeMotors.setPower(1);
             }
             else {
                 intakeMotors.setPower(0);

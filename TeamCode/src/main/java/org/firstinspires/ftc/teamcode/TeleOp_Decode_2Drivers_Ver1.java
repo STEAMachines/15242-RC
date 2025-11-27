@@ -31,6 +31,7 @@ public class TeleOp_Decode_2Drivers_Ver1 extends LinearOpMode {
     private VisionPortal visionPortal;
     private static final boolean USE_WEBCAM = true;
     private static final int DESIRED_TAG_ID = 20;
+    private boolean intakeToggle = false;
 
     public void runOpMode() {
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
@@ -52,11 +53,11 @@ public class TeleOp_Decode_2Drivers_Ver1 extends LinearOpMode {
             rightDrive.setPower(rightPower);
 
             //left_bumper && right_bumper to move....
-            if(gamepad1.left_bumper) {
-                intakeMotors.setPower(1);
+            if (gamepad1.left_bumper && !gamepad1.left_bumper) {
+                intakeToggle = !intakeToggle;
             }
-            else if(gamepad1.right_bumper) {
-                intakeMotors.setPower(-1);
+            if (intakeToggle) {
+                intakeMotors.setPower(1);
             }
             else {
                 intakeMotors.setPower(0);
