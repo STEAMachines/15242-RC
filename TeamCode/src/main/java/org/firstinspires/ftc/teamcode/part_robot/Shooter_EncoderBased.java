@@ -8,25 +8,25 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Shooter_EncoderBased {
-    public DcMotorEx shooterMotors;
+    public DcMotorEx launcherMotors;
 
     public Shooter_EncoderBased(HardwareMap hardwareMap) {
-        shooterMotors = hardwareMap.get(DcMotorEx.class, "shooterMotors");
+        launcherMotors = hardwareMap.get(DcMotorEx.class, "launcherMotors");
     }
     public class ShooterMotorsThrow implements Action {
         private boolean initialized = false;
         public boolean run(@NonNull TelemetryPacket packet) {
             if(!initialized) {
-                shooterMotors.setPower(1);
+                launcherMotors.setPower(1);
                 initialized = true;
             }
-            double pos = shooterMotors.getCurrentPosition();
+            double pos = launcherMotors.getCurrentPosition();
             packet.put("shooterPos", pos);
             if(pos < 5000) {
                 return true;
             }
             else {
-                shooterMotors.setPower(0);
+                launcherMotors.setPower(0);
                 return false;
             }
         }
