@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -26,7 +27,8 @@ public class TeleOp_Decode_1Drivers_Ver1 extends LinearOpMode {
     private DcMotor rightDrive;
     private DcMotor intakeMotors;
     private DcMotor launcherMotors;
-    private Servo handleServo;
+    private CRServo servoA;
+    private CRServo servoB;
     private AprilTagProcessor aprilTag;
     private AprilTagDetection desiredTag;
     private VisionPortal visionPortal;
@@ -39,17 +41,18 @@ public class TeleOp_Decode_1Drivers_Ver1 extends LinearOpMode {
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         intakeMotors = hardwareMap.get(DcMotor.class, "intakeMotors");
         launcherMotors = hardwareMap.get(DcMotor.class, "launcherMotors");
-        handleServo = hardwareMap.get(Servo.class, "handleServo");
+        servoA = hardwareMap.get(CRServo.class, "servoA");
+        servoB = hardwareMap.get(CRServo.class, "servoB");
         waitForStart();
 //        initializeAprilTag();
 //        displayWebcamVision();
         while(opModeIsActive()) {
             double leftPower;
             double rightPower;
-            double drive = gamepad1.right_stick_x;
-            double turn = -gamepad1.left_stick_y;
-            leftPower = Range.clip(drive + turn, -1.0, 1.0);
-            rightPower = Range.clip(drive - turn, -1.0, 1.0);
+            double drive = -gamepad1.left_stick_y;
+            double turn = gamepad1.right_stick_x;
+            leftPower = Range.clip(turn + drive, -1.0, 1.0);
+            rightPower = Range.clip(turn - drive, -1.0, 1.0);
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
             //left_bumper && right_bumper to move......
@@ -66,21 +69,18 @@ public class TeleOp_Decode_1Drivers_Ver1 extends LinearOpMode {
             if(gamepad1.left_trigger == 1.0) {
                 launcherMotors.setPower(1);
             }
-            else if(gamepad1.right_trigger == 1.0) {
-                launcherMotors.setPower(-1);
-            }
             else {
                 launcherMotors.setPower(0);
             }
-            if(gamepad1.right_bumper) {
-                handleServo.setPosition(1);
-            }
-            else if(gamepad1.left_bumper) {
-                handleServo.setPosition(-1);
-            }
-            else {
-                handleServo.setPosition(0);
-            }
+//            if(gamepad1.right_bumper) {
+//                handleServo.setPosition(1);
+//            }
+//            else if(gamepad1.left_bumper) {
+//                handleServo.setPosition(-1);
+//            }
+//            else {
+//                handleServo.setPosition(0);
+//            }
         }
     }
     public void initializeAprilTag() {

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
@@ -25,7 +26,8 @@ public class TeleOp_Decode_2Drivers_Ver1 extends LinearOpMode {
     private DcMotor rightDrive;
     private DcMotor intakeMotors;
     private DcMotor launcherMotors;
-    private Servo handleServo;
+    private CRServo servoA;
+    private CRServo servoB;
     private AprilTagProcessor aprilTag;
     private AprilTagDetection desiredTag;
     private VisionPortal visionPortal;
@@ -38,17 +40,18 @@ public class TeleOp_Decode_2Drivers_Ver1 extends LinearOpMode {
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         intakeMotors = hardwareMap.get(DcMotor.class, "intakeMotors");
         launcherMotors = hardwareMap.get(DcMotor.class, "launcherMotors");
-        handleServo = hardwareMap.get(Servo.class, "handleServo");
+        servoA = hardwareMap.get(CRServo.class, "servoA");
+        servoB = hardwareMap.get(CRServo.class, "servoB");
         waitForStart();
-        initializeAprilTag();
-        displayWebcamVision();
+//        initializeAprilTag();
+//        displayWebcamVision();
         while(opModeIsActive()) {
             double leftPower;
             double rightPower;
             double drive = -gamepad1.left_stick_y;
             double turn = gamepad1.right_stick_x;
-            leftPower = Range.clip(drive + turn, -1.0, 1.0);
-            rightPower = Range.clip(drive - turn, -1.0, 1.0);
+            leftPower = Range.clip(turn + drive, -1.0, 1.0);
+            rightPower = Range.clip(turn - drive, -1.0, 1.0);
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
 
@@ -66,20 +69,8 @@ public class TeleOp_Decode_2Drivers_Ver1 extends LinearOpMode {
             if(gamepad2.left_trigger == 1.0) {
                 launcherMotors.setPower(1);
             }
-            else if(gamepad2.right_trigger == 1.0) {
-                launcherMotors.setPower(-1);
-            }
             else {
                 launcherMotors.setPower(0);
-            }
-            if(gamepad2.right_bumper) {
-                handleServo.setPosition(1);
-            }
-            else if(gamepad2.left_bumper) {
-                handleServo.setPosition(-1);
-            }
-            else {
-                handleServo.setPosition(0);
             }
         }
     }
