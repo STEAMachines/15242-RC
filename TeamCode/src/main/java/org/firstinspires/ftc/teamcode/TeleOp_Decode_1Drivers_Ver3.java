@@ -13,6 +13,8 @@ public class TeleOp_Decode_1Drivers_Ver3 extends LinearOpMode {
     private DcMotor intakeMotors;
     private DcMotor launcherMotors;
     private Servo handleServo;
+    private boolean prevA = false;
+    int togglr = -1;
     public void runOpMode() {
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
@@ -41,23 +43,16 @@ public class TeleOp_Decode_1Drivers_Ver3 extends LinearOpMode {
                     0
             );
 
-            int iStat = 0;
-            if (gamepad1.x && iStat == 0) {
-                intakeMotors.setPower(1.0);
-                iStat = 1;
+            if (gamepad1.a && !prevA) {
+                togglr *= -1;
             }
-            else if (gamepad1.x && iStat == 1) {
-                intakeMotors.setPower(0);
-                iStat = 0;
-            }
-            int lStat = 0;
-            if (gamepad1.y && lStat == 0) {
+            prevA = gamepad1.a;
+
+            if (togglr == 1) {
                 launcherMotors.setPower(1.0);
-                lStat = 1;
             }
-            else if (gamepad1.y && lStat == 1) {
+            else if (togglr == -1) {
                 launcherMotors.setPower(0);
-                lStat = 0;
             }
         }
     }
