@@ -17,9 +17,19 @@ public class AutoDrive2_MeepMeep extends LinearOpMode {
         RollerIntake_EncoderBased intake = new RollerIntake_EncoderBased(hardwareMap);
         Shooter_EncoderBased shooter = new Shooter_EncoderBased(hardwareMap);
         waitForStart();
-        if(!isStopRequested()) return;
         Actions.runBlocking(
                 drive.actionBuilder(beginPose)
+                        .turn(Math.toRadians(-45))
+                        .lineToY(0)
+                        .turn(Math.toRadians(15))
+                        .waitSeconds(3)
+                        .lineToY(-34)
+                        .waitSeconds(3)
+                        .turn(Math.toRadians(-60))
+                        .lineToY(5)
+                        .waitSeconds(3)
+                        .lineToY(-5)
+                        .turn(Math.toRadians(-60))
                         .build());
     }
 }

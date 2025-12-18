@@ -26,18 +26,22 @@ public class AutoDrive1_MeepMeep extends LinearOpMode {
 //                .build();
         Actions.runBlocking(
                 drive.actionBuilder(beginPose)
-                        .splineTo(new Vector2d(40, 40), Math.toRadians(0))
+                        .turn(Math.toRadians(-45))
+                        .lineToY(0)
+//                        .splineTo(new Vector2d(0, 0), Math.toRadians(135))
 //                        .lineToXLinearHeading(0, Math.toRadians(135))
                         .turn(Math.toRadians(15))
-                        .lineToX(0)
-//                        .afterTime(3, shooter.shooterMotorsThrow())
                         .waitSeconds(3)
+                        .lineToY(-34)
+                        .waitSeconds(3)
+//                        .afterTime(3, shooter.shooterMotorsThrow())
+                        .turn(Math.toRadians(-60))
+                        .lineToY(5)
+                        .waitSeconds(3)
+                        .lineToY(-5)
                         .turn(Math.toRadians(-60))
 ////                        .strafeTo(new Vector2d(-34, 34))
 ////                        .afterTime(3, shooter.shooterMotorsThrow())
-                        .waitSeconds(3)
-                        .lineToX(20)
-                        .turn(Math.toRadians(90))
 ////                        .strafeTo(new Vector2d(25,   -25))
                         .build());
     }
