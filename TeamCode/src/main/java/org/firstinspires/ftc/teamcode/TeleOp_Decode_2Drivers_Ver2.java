@@ -13,15 +13,13 @@ public class TeleOp_Decode_2Drivers_Ver2 extends LinearOpMode {
     private DcMotor rightDrive;
     private DcMotor intakeMotors;
     private DcMotor launcherMotors;
-    private CRServo servoA;
-    private CRServo servoB;
+    private CRServo handleServo;
     public void runOpMode() {
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         intakeMotors = hardwareMap.get(DcMotor.class, "intakeMotors");
         launcherMotors = hardwareMap.get(DcMotor.class, "launcherMotors");
-        servoA = hardwareMap.get(CRServo.class, "servoA");
-        servoB = hardwareMap.get(CRServo.class, "servoB");
+        handleServo = hardwareMap.get(CRServo.class, "handleServo");
         waitForStart();
         while(opModeIsActive()) {
             double drive = -gamepad1.left_stick_y;
@@ -36,6 +34,10 @@ public class TeleOp_Decode_2Drivers_Ver2 extends LinearOpMode {
             launcherMotors.setPower(
                     gamepad2.right_trigger == 1.0 ? 1.0 :
                     0
+            );
+            handleServo.setPower(
+                    gamepad1.left_trigger == 1.0 ? 1 :
+                            0
             );
 //            handleServo.setPosition(
 //                    gamepad2.right_bumper ? 1.0 :

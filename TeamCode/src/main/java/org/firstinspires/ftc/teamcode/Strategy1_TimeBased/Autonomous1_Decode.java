@@ -13,6 +13,10 @@ public class Autonomous1_Decode extends LinearOpMode {
         leftDrive = hardwareMap.get(DcMotor.class, "leftDrive");
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         waitForStart();
-
+        leftDrive.setPower(0.5);
+        rightDrive.setPower(-0.5);
+        sleep(1000);
+        leftDrive.setPower(0);
+        rightDrive.setPower(0);
     }
 }

@@ -26,8 +26,7 @@ public class TeleOp_Decode_2Drivers_Ver1 extends LinearOpMode {
     private DcMotor rightDrive;
     private DcMotor intakeMotors;
     private DcMotor launcherMotors;
-    private CRServo servoA;
-    private CRServo servoB;
+    private CRServo handleServo;
     private AprilTagProcessor aprilTag;
     private AprilTagDetection desiredTag;
     private VisionPortal visionPortal;
@@ -40,8 +39,7 @@ public class TeleOp_Decode_2Drivers_Ver1 extends LinearOpMode {
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
         intakeMotors = hardwareMap.get(DcMotor.class, "intakeMotors");
         launcherMotors = hardwareMap.get(DcMotor.class, "launcherMotors");
-        servoA = hardwareMap.get(CRServo.class, "servoA");
-        servoB = hardwareMap.get(CRServo.class, "servoB");
+        handleServo = hardwareMap.get(CRServo.class, "handleServo");
         waitForStart();
 //        initializeAprilTag();
 //        displayWebcamVision();
@@ -56,11 +54,17 @@ public class TeleOp_Decode_2Drivers_Ver1 extends LinearOpMode {
             rightDrive.setPower(rightPower);
 
             //left_bumper && right_bumper to move....
-            if (gamepad1.left_bumper && !gamepad1.left_bumper) {
-                intakeToggle = !intakeToggle;
-            }
-            if (intakeToggle) {
-                intakeMotors.setPower(1);
+//            if (gamepad1.left_bumper && !gamepad1.left_bumper) {
+//                intakeToggle = !intakeToggle;
+//            }
+//            if (intakeToggle) {
+//                intakeMotors.setPower(1);
+//            }
+//            else {
+//                intakeMotors.setPower(0);
+//            }
+            if(gamepad1.left_bumper) {
+                intakeMotors.setPower(-1);
             }
             else {
                 intakeMotors.setPower(0);
@@ -68,9 +72,11 @@ public class TeleOp_Decode_2Drivers_Ver1 extends LinearOpMode {
             //left_trigger && right_trigger to move....
             if(gamepad2.left_trigger == 1.0) {
                 launcherMotors.setPower(1);
+                handleServo.setPower(1);
             }
             else {
                 launcherMotors.setPower(0);
+                handleServo.setPower(0);
             }
         }
     }
