@@ -23,7 +23,10 @@ public class TeleOp_Decode_1Drivers_Ver1 extends LinearOpMode {
     final double TURN_GAIN = 0.01;
     final double MAX_AUTO_SPEED = 1.0;
     final double MAX_AUTO_TURN = 0.5;
-    private DcMotor leftDrive, rightDrive, intakeMotors, launcherMotors;
+    private DcMotor leftDrive;
+    private DcMotor rightDrive;
+    private DcMotor intakeMotors;
+    private DcMotor launcherMotors;
     private CRServo handleServo;
     private AprilTagProcessor aprilTag;
     private AprilTagDetection desiredTag;

@@ -5,8 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name="AutoDrive1_EncoderBased", group="STEAMachines_DECODE")
-public class AutoDrive1_EncoderBased extends LinearOpMode {
+@Autonomous(name="AutoDrive2_EncoderBased", group="STEAMachines_DECODE")
+public class AutoDrive2_EncoderBased extends LinearOpMode {
+
     private DcMotor leftDrive;
     private DcMotor rightDrive;
     private int leftPos;
