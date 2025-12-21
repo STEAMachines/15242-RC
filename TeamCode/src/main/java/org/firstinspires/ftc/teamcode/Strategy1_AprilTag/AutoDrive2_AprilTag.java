@@ -43,7 +43,7 @@ public class AutoDrive2_AprilTag extends LinearOpMode {
 //        aprilTag.setDecimation(3); //If wanna use decimation for down-sampling images or decrease the amount of fps to create smaller images
         VisionPortal.Builder builder = new VisionPortal.Builder();
         if(USE_WEBCAM) {
-            builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam1"));
+            builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam SM"));
         }
         else{
             builder.setCamera(BuiltinCameraDirection.BACK);

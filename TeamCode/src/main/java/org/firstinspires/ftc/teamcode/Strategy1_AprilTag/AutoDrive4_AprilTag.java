@@ -42,7 +42,7 @@ public class AutoDrive4_AprilTag extends LinearOpMode {
         aprilTag = new AprilTagProcessor.Builder().build();
         VisionPortal.Builder builder = new VisionPortal.Builder();
         if(USE_WEBCAM) {
-            builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam1"));
+            builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam SM"));
         }
         else {
             builder.setCamera(BuiltinCameraDirection.BACK);
