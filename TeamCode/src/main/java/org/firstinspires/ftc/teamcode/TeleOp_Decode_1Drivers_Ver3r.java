@@ -3,15 +3,12 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.hardware.lynx.LynxServoController;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
-import org.firstinspires.ftc.vision.VisionPortal;
-import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
 
-@TeleOp(name="TeleOp-1Drivers_Decode_Ver3", group="STEAMachines_DECODE")
-public class TeleOp_Decode_1Drivers_Ver3 extends LinearOpMode {
+@TeleOp(name="TeleOp-1Drivers_Decode_Ver3r", group="STEAMachines_DECODE")
+public class TeleOp_Decode_1Drivers_Ver3r extends LinearOpMode {
     private DcMotor leftDrive;
     private DcMotor rightDrive;
     private DcMotor intakeMotors;
@@ -32,8 +29,8 @@ public class TeleOp_Decode_1Drivers_Ver3 extends LinearOpMode {
             leftDrive.setPower(Range.clip(turn-drive, -1.0, 1.0));
             rightDrive.setPower(Range.clip(turn+drive, -1.0, 1.0));
             intakeMotors.setPower(
-                    gamepad1.left_bumper ? 1.0 :
-                    gamepad1.right_bumper ? -1.0 :
+                    gamepad1.right_bumper ? 1.0 :
+                    gamepad1.left_bumper ? -1.0 :
                     0
             );
             launcherMotors.setPower(

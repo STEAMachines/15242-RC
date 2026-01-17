@@ -3,15 +3,12 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.hardware.lynx.LynxServoController;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
-import org.firstinspires.ftc.vision.VisionPortal;
-import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
 
-@TeleOp(name="TeleOp-1Drivers_Decode_Ver3", group="STEAMachines_DECODE")
-public class TeleOp_Decode_1Drivers_Ver3 extends LinearOpMode {
+@TeleOp(name="TeleOp-1Drivers_Decode_Ver3t", group="STEAMachines_DECODE")
+public class TeleOp_Decode_1Drivers_Ver3t extends LinearOpMode {
     private DcMotor leftDrive;
     private DcMotor rightDrive;
     private DcMotor intakeMotors;
@@ -27,10 +24,10 @@ public class TeleOp_Decode_1Drivers_Ver3 extends LinearOpMode {
         handleServo = hardwareMap.get(Servo.class, "handleServo");
         waitForStart();
         while(opModeIsActive()) {
-            double drive = gamepad1.left_stick_y;
-            double turn = gamepad1.right_stick_x;
-            leftDrive.setPower(Range.clip(turn-drive, -1.0, 1.0));
-            rightDrive.setPower(Range.clip(turn+drive, -1.0, 1.0));
+            double ldrive = -gamepad1.left_stick_y;
+            double rdrive = gamepad1.right_stick_y;
+            leftDrive.setPower(Range.clip(ldrive, -1.0, 1.0));
+            rightDrive.setPower(Range.clip(rdrive, -1.0, 1.0));
             intakeMotors.setPower(
                     gamepad1.left_bumper ? 1.0 :
                     gamepad1.right_bumper ? -1.0 :
@@ -46,6 +43,11 @@ public class TeleOp_Decode_1Drivers_Ver3 extends LinearOpMode {
             }
             if (gamepad1.a) {
                 handleServo.setPosition(0.0);
+            }
+            if (gamepad1.x) {
+                intakeMotors.setPower(1.0);
+                sleep(300);
+                intakeMotors.setPower(0.0);
             }
             telemetry.addData("pos", handleServo.getPosition());
             telemetry.update();
