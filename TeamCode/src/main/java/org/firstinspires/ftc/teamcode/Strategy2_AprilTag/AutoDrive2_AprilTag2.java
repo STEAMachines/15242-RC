@@ -17,6 +17,7 @@ import java.util.List;
 public class AutoDrive2_AprilTag2 extends LinearOpMode {
     private DcMotor leftDrive;
     private DcMotor rightDrive;
+    private DcMotor
     private VisionPortal visionPortal;
     private AprilTagProcessor aprilTag;
     private AprilTagDetection desiredTag;
