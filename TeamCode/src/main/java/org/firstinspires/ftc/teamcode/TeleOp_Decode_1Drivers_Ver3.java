@@ -109,14 +109,18 @@ public class TeleOp_Decode_1Drivers_Ver3 extends LinearOpMode {
             telemetry.addData("Bearing", detection.ftcPose.bearing);
         }
         if(targetFound) {
-            while (desiredTag.ftcPose.bearing > 0) {
-                double rangeError = (desiredTag.ftcPose.range - DESIRED_DISTANCE);
-                double headingError = desiredTag.ftcPose.bearing;
-                drive = Range.clip(rangeError * SPEED_GAIN, -MAX_AUTO_SPEED, MAX_AUTO_SPEED);
-                turn = Range.clip(headingError * TURN_GAIN, -MAX_AUTO_TURN, MAX_AUTO_TURN);
+            double rangeError = (desiredTag.ftcPose.range - DESIRED_DISTANCE);
+            double headingError = desiredTag.ftcPose.bearing;
+            while (desiredTag.ftcPose.bearing != 0.0) {
+                leftDrive.setPower(-desiredTag.ftcPose.bearing);
+                rightDrive.setPower(-desiredTag.ftcPose.bearing);
                 telemetry.addData("Found", "ID %d (%s)", desiredTag.id, desiredTag.metadata.name);
-                telemetry.addData("Range", "%5.1f inches", desiredTag.ftcPose.range);
                 telemetry.addData("Bearing", "%3.0f degrees", desiredTag.ftcPose.bearing);
+                while (desiredTag.ftcPose.range != DESIRED_DISTANCE) {
+                    leftDrive.setPower(desiredTag.ftcPose.range);
+                    rightDrive.setPower(desiredTag.ftcPose.range);
+                    telemetry.addData("Range", "%3.0f cm", desiredTag.ftcPose.range * 2.54);
+                }
             }
         }
         else {
